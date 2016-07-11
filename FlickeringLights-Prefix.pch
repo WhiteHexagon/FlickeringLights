@@ -1,0 +1,43 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DLog(...)
+#endif
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_WIDESCREEN (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
+
+#ifdef __IPHONE_6_0 // iOS6 and later
+#define UITextAlignmentCenter    NSTextAlignmentCenter
+#define UITextAlignmentLeft      NSTextAlignmentLeft
+#define UITextAlignmentRight     NSTextAlignmentRight
+#define UILineBreakModeTailTruncation     NSLineBreakByTruncatingTail
+#define UILineBreakModeMiddleTruncation   NSLineBreakByTruncatingMiddle
+#define UILineBreakModeWordWrap     NSLineBreakByWordWrapping
+#endif
+
+#ifndef NS_DESIGNATED_INITIALIZER
+#if __has_attribute(objc_designated_initializer)
+#define NS_DESIGNATED_INITIALIZER __attribute__((objc_designated_initializer))
+#else
+#define NS_DESIGNATED_INITIALIZER
+#endif
+#endif
